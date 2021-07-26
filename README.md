@@ -1,4 +1,4 @@
-## todo
+## Todo
 Practice ReactJs ToDo application with offline support 
 
 ## Getting started
