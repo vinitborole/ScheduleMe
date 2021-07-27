@@ -1,9 +1,7 @@
-import { Link as RouterLink } from 'react-router-dom';
 // material
 import { styled } from '@material-ui/core/styles';
-import { Card, Stack, Link, Container, Typography } from '@material-ui/core';
+import { Card, Stack, Container, Typography } from '@material-ui/core';
 // layouts
-import AuthLayout from '../layouts/AuthLayout';
 // components
 import Page from '../components/Page';
 import { MHidden } from '../components/@material-extend';
@@ -47,7 +45,7 @@ export default function Login() {
         <ContentStyle>
           <Stack sx={{ mb: 5 }}>
             <Typography variant="h4" gutterBottom>
-              Visit your Task Room, Create and Get Updated on your Schedule
+              Visit your Task Room, Create and Get Updates on your Schedule
             </Typography>
             <Typography sx={{ color: 'text.secondary' }}>Just a demo for now. ;) </Typography>
           </Stack>

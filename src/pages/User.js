@@ -82,7 +82,7 @@ function applySortFilter(array, comparator, query) {
 }
 
 export default function User() {
-  const { height, width } = useWindowDimensions();
+  const { height } = useWindowDimensions();
   const h = height - 65 - 60 - 52;
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
@@ -92,7 +92,7 @@ export default function User() {
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [open, setOpen] = useState(false);
-  const [action, setAction] = useState('');
+
   const [taskId, setTaskId] = useState(0);
   const [selectedTask, setSelectedTask] = useState(null);
   const notify = (msg) => {
@@ -102,7 +102,7 @@ export default function User() {
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
   useEffect(() => {
     fetchData();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchData = () => {
     TutorialDataService.getAll().once('value', onDataChange);
@@ -139,6 +139,7 @@ export default function User() {
         console.log('The world is going to end today.');
         notify(msg);
       });
+      console.log(job);
       // }
     }
 
@@ -158,7 +159,7 @@ export default function User() {
         : new Date().toISOString().slice(0, -5)
     },
     validationSchema: LoginSchema,
-    onSubmit: (values, { setSubmitting, resetForm }) => {
+    onSubmit: (values, { resetForm }) => {
       console.log(values);
       if (taskId === 0) {
         const data = {
@@ -198,7 +199,7 @@ export default function User() {
     }
   });
 
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } = formik;
+  const { errors, touched, handleSubmit, getFieldProps } = formik;
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -234,6 +235,7 @@ export default function User() {
   };
 
   const handleChangePage = (event, newPage) => {
+    console.log(event);
     setPage(newPage);
   };
 
@@ -247,6 +249,7 @@ export default function User() {
   };
 
   const onDeleteButtonPress = (event) => {
+    console.log(event);
     console.log(selected);
     const updates = {};
     let i = 0;
@@ -264,6 +267,7 @@ export default function User() {
       });
   };
   const markAsPending = (event) => {
+    console.log(event);
     console.log(selected);
     const updates = {};
     let i = 0;
@@ -285,6 +289,7 @@ export default function User() {
       });
   };
   const markAsDone = (event) => {
+    console.log(event);
     console.log('marking as done', selected);
     const updates = {};
     let i = 0;
@@ -326,10 +331,8 @@ export default function User() {
   };
 
   const handleClickOpen = (action, id) => {
-    setAction(action);
-
+    console.log(action);
     setTaskId(id);
-
     setOpen(true);
   };
 
@@ -360,7 +363,7 @@ export default function User() {
           buttonAction={addTask}
           deleteButtonAction={onDeleteButtonPress}
         />
-        <button onClick={notify}>Notify!</button>
+        {/* <button onClick={notify}>Notify!</button> */}
         <ToastContainer
           position="top-right"
           autoClose={30000}
